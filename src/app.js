@@ -9,12 +9,15 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(compression());
 
+// init DB
+require("./dbs/init.mongodb")
+const { checkOverload } = require("../helper/check.connect")
+checkOverload();
+
 app.get('/', (req, res, next) => {
-  const strCompress = "Hello Mo";
 
   return res.status(200).json({
     message: 'Welcome Mo',
-    metadata: strCompress.repeat(100000)
   })
 })
 
