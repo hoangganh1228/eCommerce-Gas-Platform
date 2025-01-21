@@ -15,11 +15,6 @@ require("./dbs/init.mongodb")
 const { checkOverload } = require("../helper/check.connect")
 checkOverload();
 
-app.get('/', (req, res, next) => {
-
-  return res.status(200).json({
-    message: 'Welcome Mo',
-  })
-})
+app.use('/', require('./routes/index'))
 
 module.exports = app
