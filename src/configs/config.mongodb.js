@@ -19,7 +19,8 @@ const dev = {
   db: {
     host: 'localhost',
     port: 27017,
-    name: 'dbDev'
+    name: 'shopDEV'
+
   }
 }
 

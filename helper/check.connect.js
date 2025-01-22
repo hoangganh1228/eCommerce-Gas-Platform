@@ -1,7 +1,7 @@
 'use strict'
 
 const { default: mongoose } = require("mongoose")
-const _SECONDS = 5000
+const _SECONDS = 500000
 const os = require('os')
 const process = require("process")
 

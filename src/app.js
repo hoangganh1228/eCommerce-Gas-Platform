@@ -5,6 +5,9 @@ const helmet = require('helmet')
 const compression = require("compression");
 
 const app = express()
+// Middleware để xử lý JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 app.use(helmet());
