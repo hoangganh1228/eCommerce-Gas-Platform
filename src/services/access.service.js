@@ -7,6 +7,7 @@ const crypto = require('crypto')
 const {createTokenPair} = require("../auth/authUtils");
 const {getInfoData} = require("../utils/index")
 const { format } = require("path");
+const { BadRequestError, ConflictRequestError } = require("../../core/error.response");
 const RoleShop = {
   SHOP: 'SHOP',
   WRITER: 'WRITER',
@@ -21,10 +22,7 @@ class AccessService {
       // step1: check email exist
       const hoderShop = await shopModel.findOne({email}).lean()
       if(hoderShop) {
-        return {
-          code: 'xxxx',
-          message: 'Shop already registered'
-        }
+        throw new BadRequestError('Error: Shop already registered') 
       }
 
       // Step 2: Hash password
