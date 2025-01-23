@@ -4,6 +4,7 @@ const HEADER = {
   AUTHORIZATION: 'authorization'
 }
 
+const asyncHandler = require("../../helper/asyncHandler");
 const {findById} = require("../services/apikey.service")
 
 
@@ -51,11 +52,6 @@ const permission = (permission) => {
   }
 }
 
-const asyncHandler = fn => {
-  return (req, res, next) => {
-    fn(req, res, next).catch(next)
-  }
-}
 
 
 module.exports = {
