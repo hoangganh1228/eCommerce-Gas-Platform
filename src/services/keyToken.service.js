@@ -1,16 +1,27 @@
 'use strict';
-const keyTokenModel = require("../models/keytoken.model")
+const { filter } = require("lodash");
+const keytokenModel = require("../models/keytoken.model");
+const { options } = require("../routes");
 
 class KeyTokenService {
-  static createKey = async ({userId, publicKey, privateKey}) => {
+  static createKey = async ({userId, publicKey, privateKey, refreshToken}) => {
     try {
-      const tokens = await keyTokenModel.create({
-        user: userId,
-        publicKey,
-        privateKey
-      })
+      // level 0
+      // const tokens = await keyTokenModel.create({
+      //   user: userId,
+      //   publicKey,
+      //   privateKey
+      // })
 
-      return tokens ? publicKey : null
+      // return tokens ? publicKey : null
+
+      // level xxx
+      const filter = {user: userId}, update = {
+        publicKey, privateKey, refreshTokenUsed: [], refreshToken
+      }, options = {upsert: true, new: true}
+      const tokens = await keytokenModel.findOneAndUpdate(filter, update, options)
+
+      return tokens ? tokens.publicKey : null
     } catch (error) {
       return error
     }
