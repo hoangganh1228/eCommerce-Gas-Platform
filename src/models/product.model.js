@@ -11,7 +11,7 @@ var productSchema = new Schema({
     type:String,
     required: true
   },
-  product_thmb:{
+  product_thumb:{
     type:String,
     required: true
   },
@@ -48,7 +48,7 @@ var productSchema = new Schema({
 const clothingSchema = new Schema({
   brand: {
     type: String, 
-    requrie: true
+    required: true
   },
   size: String,
   material: String
@@ -62,7 +62,7 @@ const clothingSchema = new Schema({
 const electronicSchema = new Schema({
   manufacturer: {
     type: String, 
-    requrie: true
+    required: true
   },
   model: String,
   color: String
@@ -75,5 +75,5 @@ const electronicSchema = new Schema({
 module.exports = {
   product: model(DOCUMENT_NAME, productSchema),
   electronic: model('Electronics', electronicSchema),
-  clothing: model('Clothing', clothes)
+  clothing: model('Clothing', clothingSchema)
 };
