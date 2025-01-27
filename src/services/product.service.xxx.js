@@ -1,6 +1,13 @@
 'use strict';
 const {product, clothing, electronic, furniture} = require('../models/product.model')
 const {BadRequestError} = require('../../core/error.response')
+const {
+  findAllDraftsForShop, 
+  publishProductByShop,
+  findAllPublishForShop,
+  unPublishProductByShop,
+  searchProductByUser
+} = require("../models/ropositories/product.repo")
 // define Factory class to create product
 
 class ProductFactory {
@@ -17,6 +24,36 @@ class ProductFactory {
     return new productClass(payload).createProduct()
 
   }
+
+  // PUT
+
+  static async publishProductByShop({product_shop, product_id}) {
+    return await publishProductByShop({product_shop, product_id})
+  }
+
+  static async unPublishProductByShop({product_shop, product_id}) {
+    return await unPublishProductByShop({product_shop, product_id})
+  }
+
+  // END PUT
+  
+  // Query
+
+  static async findAllDraftsForShop({product_shop, limit =  50, skip = 0}) {
+    const query = {product_shop, isDraft: true}
+    return await findAllDraftsForShop({query, limit, skip})
+  }
+
+  static async findAllPublishForShop({product_shop, limit =  50, skip = 0}) {
+    const query = {product_shop, isPublished: true}
+    return await findAllPublishForShop({query, limit, skip})
+  }
+
+  static async searchProducts({keySearch}) {
+    return await searchProductByUser({keySearch})
+  }
+
+  
 }
 
 
@@ -78,7 +115,7 @@ class Electronics extends Product {
 class Furniture extends Product {
   async createProduct() {
     const newFurniture = await furniture.create({
-      ...this.product_attributes,
+      ...this.product_attributes, 
       product_shop: this.product_shop  
     })
     if(!newFurniture) throw new BadRequestError('create new Furniture error')
