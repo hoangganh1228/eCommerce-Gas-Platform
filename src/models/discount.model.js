@@ -32,6 +32,10 @@ var discountSchema = new Schema({
     type: Date,
     required: true
   },   // ngay bat dau
+  discount_end_date: {
+    type: Date,
+    required: true,
+  },
   discount_max_uses: {
     type: Number,
     required: true
@@ -63,7 +67,7 @@ var discountSchema = new Schema({
   discount_applies_to: {
     type: String,
     required: true,
-    enaum: ['all', 'specific']
+    enum: ['all', 'specific']
   },
   discount_product_ids: {
     type: Array,
@@ -75,4 +79,4 @@ var discountSchema = new Schema({
 });
 
 //Export the model
-module.exports = model(DOCUMENT_NAME, apiKeySchema);
+module.exports = model(DOCUMENT_NAME, discountSchema);
