@@ -26,7 +26,7 @@ const cartSchema = new Schema({
   }
 }, {
   collection:  COLLECTION_NAME,
-  timeseries: {
+  timestamps: {
     createdAt: 'createdOn',
     updatedAt: 'modifiedOn' 
   }
