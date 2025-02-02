@@ -8,6 +8,8 @@ const {
   convertToObjectIdMongodb
 } = require("../utils/index")
 
+const discount = require('../models/discount.model')
+
 const { findAllProducts } = require('../models/ropositories/product.repo')
 
 const Discount = require("../models/discount.model")
@@ -43,7 +45,7 @@ class DiscountService {
     }
   
     // create index for discount code
-    const foundDiscount = await discount.findOne({
+    const foundDiscount = await Discount.findOne({
       discount_code: code,
       discount_shopId: convertToObjectIdMongodb(shopId)
     }).lean()
